@@ -39,7 +39,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1" >
 
-        <com.triggertrap.seekarc.SeekArc
+        <com.triggertrap.seekarc.CircularSelector
             android:id="@+id/seekArc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

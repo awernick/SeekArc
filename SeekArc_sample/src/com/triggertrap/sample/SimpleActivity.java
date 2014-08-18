@@ -31,8 +31,8 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.triggertrap.seekarc.SeekArc;
-import com.triggertrap.seekarc.SeekArc.OnSeekArcChangeListener;
+import com.triggertrap.seekarc.CircularSelector;
+import com.triggertrap.seekarc.CircularSelector.OnSeekArcChangeListener;
 
 /**
  * 
@@ -42,7 +42,7 @@ import com.triggertrap.seekarc.SeekArc.OnSeekArcChangeListener;
  */
 public class SimpleActivity extends Activity {
 
-	private SeekArc mSeekArc;
+	private CircularSelector mCircularSelector;
 	private SeekBar mRotation;
 	private SeekBar mStartAngle;
 	private SeekBar mSweepAngle;
@@ -58,7 +58,7 @@ public class SimpleActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.holo_sample);
 		
-		mSeekArc = (SeekArc) findViewById(R.id.seekArc);
+		mCircularSelector = (CircularSelector) findViewById(R.id.seekArc);
 		mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
 		mRotation = (SeekBar) findViewById(R.id.rotation);
 		mStartAngle = (SeekBar) findViewById(R.id.startAngle);
@@ -69,23 +69,23 @@ public class SimpleActivity extends Activity {
 		mTouchInside = (CheckBox) findViewById(R.id.touchInside);
 		mClockwise = (CheckBox) findViewById(R.id.clockwise);
 		
-		mRotation.setProgress(mSeekArc.getArcRotation());
-		mStartAngle.setProgress(mSeekArc.getStartAngle());
-		mSweepAngle.setProgress(mSeekArc.getSweepAngle());
-		mArcWidth.setProgress(mSeekArc.getArcWidth());
-		mProgressWidth.setProgress(mSeekArc.getProgressWidth());
+		mRotation.setProgress(mCircularSelector.getArcRotation());
+		mStartAngle.setProgress(mCircularSelector.getStartAngle());
+		mSweepAngle.setProgress(mCircularSelector.getSweepAngle());
+		mArcWidth.setProgress(mCircularSelector.getArcWidth());
+		mProgressWidth.setProgress(mCircularSelector.getProgressWidth());
 		
-		mSeekArc.setOnSeekArcChangeListener(new OnSeekArcChangeListener() {
+		mCircularSelector.setOnSeekArcChangeListener(new OnSeekArcChangeListener() {
 			
 			@Override
-			public void onStopTrackingTouch(SeekArc seekArc) {	
+			public void onStopTrackingTouch(CircularSelector circularSelector) {
 			}		
 			@Override
-			public void onStartTrackingTouch(SeekArc seekArc) {
+			public void onStartTrackingTouch(CircularSelector circularSelector) {
 			}
 			
 			@Override
-			public void onProgressChanged(SeekArc seekArc, int progress,
+			public void onProgressChanged(CircularSelector circularSelector, int progress,
 					boolean fromUser) {
 				mSeekArcProgress.setText(String.valueOf(progress));
 			}
@@ -102,8 +102,8 @@ public class SimpleActivity extends Activity {
 			
 			@Override
 			public void onProgressChanged(SeekBar view, int progress, boolean fromUser) {
-				mSeekArc.setArcRotation(progress);
-				mSeekArc.invalidate();
+				mCircularSelector.setArcRotation(progress);
+				mCircularSelector.invalidate();
 			}
 		});
 		
@@ -118,8 +118,8 @@ public class SimpleActivity extends Activity {
 			
 			@Override
 			public void onProgressChanged(SeekBar view, int progress, boolean fromUser) {
-				mSeekArc.setStartAngle(progress);
-				mSeekArc.invalidate();
+				mCircularSelector.setStartAngle(progress);
+				mCircularSelector.invalidate();
 			}
 		});
 		
@@ -134,8 +134,8 @@ public class SimpleActivity extends Activity {
 			
 			@Override
 			public void onProgressChanged(SeekBar view, int progress, boolean fromUser) {
-				mSeekArc.setSweepAngle(progress);
-				mSeekArc.invalidate();
+				mCircularSelector.setSweepAngle(progress);
+				mCircularSelector.invalidate();
 			}
 		});
 			
@@ -150,8 +150,8 @@ public class SimpleActivity extends Activity {
 			
 			@Override
 			public void onProgressChanged(SeekBar view, int progress, boolean fromUser) {
-				mSeekArc.setArcWidth(progress);
-				mSeekArc.invalidate();
+				mCircularSelector.setArcWidth(progress);
+				mCircularSelector.invalidate();
 			}
 		});
 		
@@ -166,31 +166,31 @@ public class SimpleActivity extends Activity {
 			
 			@Override
 			public void onProgressChanged(SeekBar view, int progress, boolean fromUser) {
-				mSeekArc.setProgressWidth(progress);
-				mSeekArc.invalidate();
+				mCircularSelector.setProgressWidth(progress);
+				mCircularSelector.invalidate();
 			}
 		});
 		
 		mRoundedEdges.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			   @Override
 			   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-				   mSeekArc.setRoundedEdges(isChecked);
-				   mSeekArc.invalidate();
+				   mCircularSelector.setRoundedEdges(isChecked);
+				   mCircularSelector.invalidate();
 			   }
 		});
 		
 		mTouchInside.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			   @Override
 			   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-				   mSeekArc.setTouchInSide(isChecked);
+				   mCircularSelector.setTouchInSide(isChecked);
 			   }
 		});
 		
 		mClockwise.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			   @Override
 			   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-				   mSeekArc.setClockwise(isChecked);
-				   mSeekArc.invalidate();
+				   mCircularSelector.setClockwise(isChecked);
+				   mCircularSelector.invalidate();
 			   }
 		});
 		

@@ -45,9 +45,9 @@ import android.view.View;
  * @author Neil Davies
  * 
  */
-public class SeekArc extends View {
+public class CircularSelector extends View {
 
-	private static final String TAG = SeekArc.class.getSimpleName();
+	private static final String TAG = CircularSelector.class.getSimpleName();
 	private static int INVALID_PROGRESS_VALUE = -1;
 	// The initial rotational offset -90 means we start at 12 o'clock
 	private final int mAngleOffset = -90;
@@ -128,7 +128,7 @@ public class SeekArc extends View {
 		 * fromUser parameter to distinguish user-initiated changes from those
 		 * that occurred programmatically.
 		 * 
-		 * @param seekArc
+		 * @param circularSelector
 		 *            The SeekArc whose progress has changed
 		 * @param progress
 		 *            The current progress level. This will be in the range
@@ -138,38 +138,38 @@ public class SeekArc extends View {
 		 * @param fromUser
 		 *            True if the progress change was initiated by the user.
 		 */
-		void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser);
+		void onProgressChanged(CircularSelector circularSelector, int progress, boolean fromUser);
 
 		/**
 		 * Notification that the user has started a touch gesture. Clients may
 		 * want to use this to disable advancing the seekbar.
 		 * 
-		 * @param seekArc
+		 * @param circularSelector
 		 *            The SeekArc in which the touch gesture began
 		 */
-		void onStartTrackingTouch(SeekArc seekArc);
+		void onStartTrackingTouch(CircularSelector circularSelector);
 
 		/**
 		 * Notification that the user has finished a touch gesture. Clients may
 		 * want to use this to re-enable advancing the seekarc.
 		 * 
-		 * @param seekArc
+		 * @param circularSelector
 		 *            The SeekArc in which the touch gesture began
 		 */
-		void onStopTrackingTouch(SeekArc seekArc);
+		void onStopTrackingTouch(CircularSelector circularSelector);
 	}
 
-	public SeekArc(Context context) {
+	public CircularSelector(Context context) {
 		super(context);
 		init(context, null, 0);
 	}
 
-	public SeekArc(Context context, AttributeSet attrs) {
+	public CircularSelector(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context, attrs, R.attr.seekArcStyle);
 	}
 
-	public SeekArc(Context context, AttributeSet attrs, int defStyle) {
+	public CircularSelector(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context, attrs, defStyle);
 	}
@@ -193,9 +193,9 @@ public class SeekArc extends View {
 		if (attrs != null) {
 			// Attribute initialization
 			final TypedArray a = context.obtainStyledAttributes(attrs,
-					R.styleable.SeekArc, defStyle, 0);
+					R.styleable.CircularSelector, defStyle, 0);
 
-			Drawable thumb = a.getDrawable(R.styleable.SeekArc_thumb);
+			Drawable thumb = a.getDrawable(R.styleable.CircularSelector_thumb);
 			if (thumb != null) {
 				mThumb = thumb;
 			}
@@ -207,24 +207,24 @@ public class SeekArc extends View {
 			mThumb.setBounds(-thumbHalfWidth, -thumbHalfheight, thumbHalfWidth,
 					thumbHalfheight);
 
-			mMax = a.getInteger(R.styleable.SeekArc_max, mMax);
-			mProgress = a.getInteger(R.styleable.SeekArc_progress, mProgress);
+			mMax = a.getInteger(R.styleable.CircularSelector_max, mMax);
+			mProgress = a.getInteger(R.styleable.CircularSelector_progress, mProgress);
 			mProgressWidth = (int) a.getDimension(
-					R.styleable.SeekArc_progressWidth, mProgressWidth);
-			mArcWidth = (int) a.getDimension(R.styleable.SeekArc_arcWidth,
+					R.styleable.CircularSelector_progressWidth, mProgressWidth);
+			mArcWidth = (int) a.getDimension(R.styleable.CircularSelector_arcWidth,
 					mArcWidth);
-			mStartAngle = a.getInt(R.styleable.SeekArc_startAngle, mStartAngle);
-			mSweepAngle = a.getInt(R.styleable.SeekArc_sweepAngle, mSweepAngle);
-			mRotation = a.getInt(R.styleable.SeekArc_rotation, mRotation);
-			mRoundedEdges = a.getBoolean(R.styleable.SeekArc_roundEdges,
+			mStartAngle = a.getInt(R.styleable.CircularSelector_startAngle, mStartAngle);
+			mSweepAngle = a.getInt(R.styleable.CircularSelector_sweepAngle, mSweepAngle);
+			mRotation = a.getInt(R.styleable.CircularSelector_rotation, mRotation);
+			mRoundedEdges = a.getBoolean(R.styleable.CircularSelector_roundEdges,
 					mRoundedEdges);
-			mTouchInside = a.getBoolean(R.styleable.SeekArc_touchInside,
+			mTouchInside = a.getBoolean(R.styleable.CircularSelector_touchInside,
 					mTouchInside);
-			mClockwise = a.getBoolean(R.styleable.SeekArc_clockwise,
+			mClockwise = a.getBoolean(R.styleable.CircularSelector_clockwise,
 					mClockwise);
 			
-			arcColor = a.getColor(R.styleable.SeekArc_arcColor, arcColor);
-			progressColor = a.getColor(R.styleable.SeekArc_progressColor,
+			arcColor = a.getColor(R.styleable.CircularSelector_arcColor, arcColor);
+			progressColor = a.getColor(R.styleable.CircularSelector_progressColor,
 					progressColor);
 
 			a.recycle();
@@ -444,7 +444,7 @@ public class SeekArc extends View {
 	 * @param l
 	 *            The seek bar notification listener
 	 * 
-	 * @see SeekArc.OnSeekBarChangeListener
+	 * @see CircularSelector.OnSeekBarChangeListener
 	 */
 	public void setOnSeekArcChangeListener(OnSeekArcChangeListener l) {
 		mOnSeekArcChangeListener = l;
